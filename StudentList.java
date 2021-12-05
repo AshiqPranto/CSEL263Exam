@@ -4,7 +4,11 @@ import java.util.*;
 public class StudentList {
 	public static void main(String[] args) {
 //		Check arguments
-		if(args[0].equals("a")) {
+		if(args.length!=1)
+		{
+			System.out.println("Please Enter only one argument..!");
+		}
+		else if(args[0].equals("a")) {
 			System.out.println("Loading data ...");			
 			try {
 			BufferedReader s = new BufferedReader(
