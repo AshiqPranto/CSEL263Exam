@@ -13,46 +13,47 @@ public class StudentList {
 				new InputStreamReader(
 					new FileInputStream(constants.StudentsList)));
 					return bufferedReader;
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				return null;
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
 			}
+		return null;
+	}
 			
-			public static BufferedWriter getBufferedWriter()
-			{
-				try {
-					BufferedWriter bufferedWriter = new BufferedWriter(
-						new FileWriter(constants.StudentsList, true));
-						return bufferedWriter;
-					} catch (Exception e) {
-						System.out.println(e);
-					}
-					return null;
-				}
+	public static BufferedWriter getBufferedWriter()
+	{
+		try {
+			BufferedWriter bufferedWriter = new BufferedWriter(
+				new FileWriter(constants.StudentsList, true));
+					return bufferedWriter;
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			return null;
+	}
 				
-				public static void main(String[] args) {
-					//		Check arguments
-					if(args.length!=1)
-					{
-						System.out.println("Please Enter only one argument..!");
-					}
-					else if(args[0].equals(constants.ShowAll)) {
-						System.out.println("Loading data ...");			
-						try {
-							BufferedReader bufferedReader = getBufferedReader();
-							String readString = bufferedReader.readLine();
-							String studentList[] = readString.split(constants.StudentEntryDelimiter);			
-							for(String student : studentList)
-							{
-								System.out.println(student);
-							}
-						}catch (Exception e)
-						{
+	public static void main(String[] args) {
+		//		Check arguments
+		if(args.length!=1)
+		{
+			System.out.println("Please Enter only one argument..!");
+		}
+		else if(args[0].equals(constants.ShowAll)) 
+		{
+			System.out.println("Loading data ...");			
+			try {
+				BufferedReader bufferedReader = getBufferedReader();
+				String readString = bufferedReader.readLine();
+				String studentList[] = readString.split(constants.StudentEntryDelimiter);			
+				for(String student : studentList)
+				{
+					System.out.println(student);
+				}
+				}catch (Exception e)
+				{
 							
-						} 
-						System.out.println("Data Loaded.");
-					}
+				} 
+				System.out.println("Data Loaded.");
+		}
 					else if(args[0].equals(constants.ShowRandom)) 
 					{
 						System.out.println("Loading data ...");			
@@ -96,17 +97,24 @@ public class StudentList {
 			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
 			String studentList[] = readString.split(constants.StudentEntryDelimiter);	
-			boolean done = false;
-			String searchStudent = args[0].substring(1);
-			for(int idx = 0; idx<studentList.length && !done; idx++) 
+			String searchStudent = args[0].substring(1).trim();
+			int indexLocation = -1;
+			for(int idx = 0; idx<studentList.length; idx++) 
 			{
-				if(studentList[idx].equals(searchStudent)) 
+				if(studentList[idx].trim().equals(searchStudent.trim())) 
 				{
-					System.out.println("We found it!");
-					done=true;
+					indexLocation = idx;
+					break;
 				}
 			}
-			} catch (Exception e)
+			if(indexLocation>=0)
+			{
+				System.out.println("Entry "+searchStudent+" found at "+indexLocation);
+			}
+			else{
+				System.out.println("Entry "+searchStudent+" does not exist");
+			}
+		} catch (Exception e)
 			{
 
 			} 
