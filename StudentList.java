@@ -1,6 +1,8 @@
 import java.io.*;
 import java.text.*;
 import java.util.*;
+
+import javax.swing.text.AbstractDocument.Content;
 public class StudentList {
 	
 	static Constants constants = new Constants();
@@ -126,25 +128,7 @@ public class StudentList {
 			try {
 			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
-			char charArray[] = readString.toCharArray();			
-			boolean in_word = false;
-			int count=0;
-			for(char c:charArray) 
-			{
-				if(c ==' ') 
-				{
-					if (!in_word)
-					{	
-						count++; 
-						in_word =true;
-					}
-					else 
-					{ 
-						in_word=false;
-					}
-				}
-			}
-			System.out.println(count +" word(s) found ");
+			System.out.println(readString.split(constants.StudentEntryDelimiter).length +" word(s) found ");
 			} catch (Exception e)
 			{
 				
