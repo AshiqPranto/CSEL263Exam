@@ -2,6 +2,33 @@ import java.io.*;
 import java.text.*;
 import java.util.*;
 public class StudentList {
+
+	public static BufferedReader getBufferedReader()
+	{
+		// BufferedReader bufferedReader;
+		try {
+			BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(
+					new FileInputStream("students.txt")));
+			return bufferedReader;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static BufferedWriter getBufferedWriter()
+	{
+		try {
+			BufferedWriter bufferedWriter = new BufferedWriter(
+				new FileWriter("students.txt", true));
+			return bufferedWriter;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+	}
+
 	public static void main(String[] args) {
 //		Check arguments
 		if(args.length!=1)
@@ -11,9 +38,7 @@ public class StudentList {
 		else if(args[0].equals("a")) {
 			System.out.println("Loading data ...");			
 			try {
-			BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(
-					new FileInputStream("students.txt"))); 
+			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
 			String studentList[] = readString.split(",");			
 			for(String student : studentList)
@@ -30,9 +55,7 @@ public class StudentList {
 		{
 			System.out.println("Loading data ...");			
 			try {
-			BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(
-					new FileInputStream("students.txt"))); 
+			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
 			// System.out.println(r);
 			String studentList[] = readString.split(", ");	
@@ -50,8 +73,7 @@ public class StudentList {
 		else if(args[0].contains("+")){
 			System.out.println("Loading data ...");			
 			try {
-			BufferedWriter bufferedWriter = new BufferedWriter(
-				new FileWriter("students.txt", true));
+			BufferedWriter bufferedWriter = getBufferedWriter();
 			String newStudent = args[0].substring(1);
 	        Date date = new Date();
 	        String dateFormatSample = "dd/mm/yyyy-hh:mm:ss a";
@@ -69,9 +91,7 @@ public class StudentList {
 		{
 			System.out.println("Loading data ...");			
 			try {
-			BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(
-					new FileInputStream("students.txt"))); 
+			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
 			String studentList[] = readString.split(",");	
 			boolean done = false;
@@ -94,9 +114,7 @@ public class StudentList {
 		{
 			System.out.println("Loading data ...");			
 			try {
-			BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(
-					new FileInputStream("students.txt"))); 
+			BufferedReader bufferedReader = getBufferedReader();
 			String readString = bufferedReader.readLine();
 			char charArray[] = readString.toCharArray();			
 			boolean in_word = false;
